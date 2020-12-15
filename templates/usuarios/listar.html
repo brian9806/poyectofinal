@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %} {% block title %} Usuarios {% endblock %} {%
+block content %}
+<div class="title-page">
+  <h1>Listado de usuarios</h1>
+  <a class="btn btn-success" href="{{ url_for('crear_usuarios') }}">Crear</a>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for usuario in usuarios %}
+    <tr>
+      <td>{{ usuario[0] }}</td>
+      <td>{{ usuario[1] }}</td>
+      <td>{{ usuario[2] }}</td>
+      <td>{{ usuario[3] }}</td>
+      <td>
+          <a class="btn btn-success" role="button" href="{{ url_for('actualizar_usuarios', id=usuario[0]) }}">Editar</a>
+          <form action="{{ url_for('delete', id=usuario[0]) }}" method="post">
+            <input class="btn btn-danger" type="submit" value="Eliminar" onclick="return confirm('Deseas Eliminar?');">
+          </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

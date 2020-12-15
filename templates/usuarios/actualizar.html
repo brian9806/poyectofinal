@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %} {% block title %} Actualizacion datos{% endblock %}
+{% block content %}
+
+<div class="row justify-content-md-center mb-3">
+  <div class="col-md-10 m-5">
+    <div class="card" >
+      <div class="card-header text-center">
+        <h5>Actualizacion datos de usuario</h5>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"> </h5>
+
+      <form action="{{ url_for('solicitud_perfil') }}" method="POST">
+        <div class="form-group">
+          <label for="nombres">Nombres</label>
+          <input type="text" value="{{usuario[0][1]}}" id="nombres" name="nombres" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" value="{{usuario[0][2]}}" id="email" name="email" class="form-control" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" value="{{usuario[0][3]}}" placeholder="Minimo 8 y maximo 15 caracteres" id="password" name="password" class="form-control" required/>
+        </div>
+        <hr style="color: #0056b2;" />
+        <div class="form-group text-center">
+          <a href="{{ url_for('index') }}" class="btn">Volver</a>
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+</form>
+{% endblock %}

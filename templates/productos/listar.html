@@ -1,0 +1,82 @@
+{% extends 'layouts/base.html' %} {% block title %} Usuarios {% endblock %} {%
+block content %}
+<div class="container-fluid">
+
+  <div class="title-page" style="text-align: center;">
+        <h1 class="text-light font-weight-bold">Listado de productos</h1>
+        
+  </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          
+            {% for category,message in messages %}
+            
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            {% endfor %}
+
+      {% endif %}
+    {% endwith %}
+  </div>
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-light">
+          <th>Id</th>
+          <th>Nombre de producto</th>
+          <th >Categoria</th>
+          <th >Precio</th>
+          <th >Acciones</th>
+          <th >
+            <a class="btn btn-primary d-block " href="{{ url_for('crear_producto') }}">Crear</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for producto in productos %}
+        <tr class="table-light">
+          <td>{{ producto[0] }}</td>
+          <td>{{ producto[1] }}</td>
+          <td>{{ producto[5] }}</td>
+          <td>{{ producto[3] }}</td>
+          <td >
+              <form method="POST" action="{{url_for('actualizar_producto')}}" >
+                <input type="hidden" value="{{producto[0]}}" name="id" id="=id">
+                <input  class="btn btn-success" type="submit" value="Editar">
+              </form>
+          </td>
+          <td >
+                <input class="btn btn-danger" type="button" value="Eliminar" onclick="eliminar({{producto[0]}})">
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+
+  function eliminar(params){
+      let id = params;
+      $.ajax({
+        url: '/productos/delete',
+        type: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({
+          'id': id
+        }),
+			
+			success: function(response){
+				window.location =response
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+  }
+</script>
+{% endblock %}
+

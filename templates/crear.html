@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    </head>
+<body>
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="card">
+            <form class="box" action="{{ url_for('perfil') }}" method="POST">
+              <div class="title-page">
+                <h1>Crear usuario</h1>
+              </div>
+            
+              <div class="form-group">
+                <label for="nombres">Ingresa tu nombre completo</label>
+                <input type="text" id="nombres" name="nombres" class="form-control" placeholder="Aqui tu nombre completo" required/>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" class="form-control" placeholder="Direccion correo electronico" required/>
+              </div>
+            
+              <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" placeholder="Minimo 8 y maximo 15 caracteres" id="password" name="password" class="form-control" required/>
+              </div>
+              <div class="footer-page">
+                <a href="{{ url_for('login') }}" class="btn">Volver</a>
+                <button type="submit" class="btn btn-success">Guardar</button>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+</body>
+
+</html>
+

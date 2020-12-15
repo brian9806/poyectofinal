@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    Principal
+{% endblock %}
+{% block content %}
+<body>
+  
+    <div class="row justify-content-md-center mb-3">
+      <div class="col-md-10 m-5">
+        
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                
+                {% for category,message in messages %}
+                
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    <strong>{{message}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                {% endfor %}
+
+            {% endif %}
+            {% endwith %}
+            <div class="card text-center">
+                <h3 class="card-header  text-white border-primary" style="background: linear-gradient(to right, #b92b27, #1565c0)">Bienvenido</h3>
+                <div class="card-body">
+                  <h5 class="card-title">Ingresaste como {{session['usuario'][1]}}</h5>
+                  <p class="card-text">Construyen un mundo mejor, Ingresa tu producto.</p>
+                 
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+  </body>
+{% endblock %}

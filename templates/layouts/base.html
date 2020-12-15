@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+
+  </head>
+
+    <nav  class="navbar navbar-expand-lg navbar-dark" style="background-color: #282f35;">
+      <div class="container-fluid">
+      <a class="navbar-brand" href="{{url_for('index')}}">{{session['usuario'][1]}}</a>
+
+          <ul class="navbar-nav pull-xs-right" >
+            <li class="nav-item " >
+              <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url_for('categorias') }}">Categorias</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url_for('productos') }}">Productos</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Opciones de usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{{ url_for('actualizar_perfil') }}">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Cerrar Sesion</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        
+       </div> 
+    </nav>
+    <div class="container">{% block content %}{% endblock %}</div>
+        {% block javascript %}{% endblock %}
+ 
+</html>

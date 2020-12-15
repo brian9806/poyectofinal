@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %} {% block title %} Usuarios {% endblock %} {%
+block content %}
+<div class="container-fluid">
+
+  <div class="title-page" style="text-align: center;">
+        <h1 class="text-light font-weight-bold">Listado de categorias</h1>
+        
+  </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          
+            {% for category,message in messages %}
+            
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+              <strong>{{message}}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            {% endfor %}
+
+      {% endif %}
+    {% endwith %}
+  </div>
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-light">
+          <th>Id</th>
+          <th>Nombre de categoria</th>
+          <th >Acciones</th>
+          <th >
+            <a class="btn btn-primary d-block " href="{{ url_for('crear_categoria') }}">Crear</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for categoria in categorias %}
+        <tr class="table-light">
+          <td>{{ categoria[0] }}</td>
+          <td>{{ categoria[1] }}</td>
+          <td >
+              <form method="POST" action="{{url_for('actualizar_categoria')}}" >
+                <input type="hidden" value="{{categoria[0]}}" name="id" id="=id">
+                <input  class="btn btn-success" type="submit" value="Editar">
+              </form>
+          </td>
+          <td >
+                <input class="btn btn-danger" type="button" value="Eliminar" onclick="eliminar({{categoria[0]}})">
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+
+  function editar(params) {
+    let id = params;
+      $.ajax({
+        url: '/categorias/actualizar',
+        type: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({
+          'id': id
+        }),
+			
+			success: function(response){
+        window.location =response
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+  }
+
+  function eliminar(params){
+      let id = params;
+      $.ajax({
+        url: '/categorias/delete',
+        type: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({
+          'id': id
+        }),
+			
+			success: function(response){
+				window.location =response
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+  }
+</script>
+{% endblock %}
+

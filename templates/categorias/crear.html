@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %} {% block title %} Crear usuario {% endblock %}
+{% block content %}
+<body>
+  
+    <div class="row justify-content-md-center mb-3">
+      <div class="col-md-10 m-5">
+        <div class="card" >
+          <div class="card-header text-center">
+            Crear categoria
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"> </h5>
+
+            <form action="{{ url_for('crear_categoria') }}" method="POST">
+              <div class="form-group">
+                <label for="nombre">Descripcion de categoria</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre de categoria" required/>
+              </div>
+              <hr style="color: #0056b2;" />
+                <div class="form-group text-center">
+                  <a href="{{ url_for('categorias') }}" class="btn btn-primary">Volver</a>
+
+                  <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+
+
+{% endblock %}
+
+

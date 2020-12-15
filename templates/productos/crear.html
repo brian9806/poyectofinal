@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %} {% block title %} Crear usuario {% endblock %}
+{% block content %}
+
+
+<body>
+  
+  <div class="row justify-content-md-center mb-3">
+    <div class="col-md-10 m-5">
+      <div class="card" >
+        <div class="card-header text-center">
+          <h5>Crear Producto</h5>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"> </h5>
+
+        <form action="{{ url_for('crear_producto') }}" method="POST">
+          <div class="form-group">
+            <label for="nombre">Nombre del producto</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre de producto" required/>
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoria del producto</label>
+            <select class="form-control" aria-label="Default select example" id="categoria" name="categoria" required>
+              {% for cat in categorias %}
+              <option value="{{ cat[0] }}">{{ cat[1] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Precio del producto</label>
+            <input type="number" id="precio" name="precio" class="form-control" placeholder="Precio del producto" required/>
+          </div>
+          <hr style="color: #0056b2;" />
+          <div class="form-group text-center">
+            <a href="{{ url_for('productos') }}" class="btn btn-primary">Volver</a>
+            <button type="submit" class="btn btn-success">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
